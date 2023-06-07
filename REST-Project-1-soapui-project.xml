@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="84fce709-6404-4131-a3f9-bb204cf7aa9a" activeEnvironment="Default" name="REST Project 1" resourceRoot="" soapui-version="5.7.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="7b4988d4-ddce-4318-9522-2ac0cf71ab46" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8081" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost:8081</con:endpoint></con:endpoints><con:resource name="Signup" path="/api/auth/signup" id="86a2655a-6a5a-44e0-bdb7-8ecaf41a0bdb"><con:settings/><con:parameters/><con:method name="Signup 1" id="0558b2fd-053e-4388-807d-6cced3a098d3" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>401 500</con:status><con:params/><con:element xmlns:sig="http://localhost/auth/signup">sig:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>201</con:status><con:params/><con:element xmlns:sig="http://localhost/auth/signup">sig:Response</con:element></con:representation><con:request name="Request 1" id="ff1c00a5-b054-4fdb-ae79-a94862011660" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8081</con:endpoint><con:request>{
+    "firstName": "Leanne",
+    "lastName": "Graham",
+    "username": "leanne",
+    "password": "password",
+    "email": "leanne.graham@gmail.com"
+}</con:request><con:originalUri>http://localhost/auth/signup</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="signin" path="/api/auth/signin" id="1674a1c2-7ebb-439d-8b60-3c3daa65ff05"><con:settings/><con:parameters/><con:method name="Method 1" id="7d9b8c2e-e2c3-4259-a41f-e4d558c781ed" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:sig="http://localhost/api/auth/signin">sig:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:sig="http://localhost/api/auth/signin">sig:Fault</con:element></con:representation><con:request name="Request 1" id="4aa1d147-794c-4899-b270-e44dce149e3f" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8081</con:endpoint><con:request>{
+    "usernameOrEmail": "leanne",
+    "password": "password"
+}</con:request><con:originalUri>http://localhost/api/auth/signin</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="6277a44f-8bd0-4571-86fa-f038f1161e2d" name="http://localhost:8081 TestSuite"><con:description>TestSuite generated for REST Service [http://localhost:8081]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="2d6fb316-d043-436e-a271-2af5437d3fe2" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="http://localhost:8081 TestSuite" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="0b17f485-f9eb-4896-915d-00020c3e97c1"><con:settings/><con:config><script>import org.apache.commons.lang3.RandomStringUtils
+
+def firstName = RandomStringUtils.randomAlphabetic(6)
+def lastName = RandomStringUtils.randomAlphabetic(6)
+def username = firstName.toLowerCase()
+def password = RandomStringUtils.randomAlphanumeric(8)
+def email = firstName + '.' + lastName + '@gmail.com'
+
+def requestBody = sprintf('''
+{
+  "firstName": "%s",
+  "lastName": "%s",
+  "username": "%s",
+  "password": "%s",
+  "email": "%s",
+  "usernameOrEmail": "%s"
+}
+''', firstName, lastName, username, password, email, username)
+return requestBody</script></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer" id="b646fde2-bc65-4ad0-b79e-6721da802d02"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>Data</con:name><con:sourceType>result</con:sourceType><con:sourceStep>Groovy Script</con:sourceStep><con:targetType>Request</con:targetType><con:targetStep>Signup</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="restrequest" name="Signup" id="a4e3db64-fc5c-4c78-ad2f-c73887659f22"><con:settings/><con:config service="http://localhost:8081" resourcePath="/api/auth/signup" methodName="Signup 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Signup" id="ff1c00a5-b054-4fdb-ae79-a94862011660" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8081</con:endpoint><con:request>
+{
+  "firstName": "wtcGhw",
+  "lastName": "pchHyG",
+  "username": "wtcghw",
+  "password": "w2oQ5Xwv",
+  "email": "wtcGhw.pchHyG@gmail.com",
+  "usernameOrEmail": "wtcghw"
+}
+</con:request><con:originalUri>http://localhost/auth/signup</con:originalUri><con:assertion type="GroovyScriptAssertion" id="2846d72e-9578-4418-8a65-3abaac6949b9" name="Script Assertion"><con:configuration><scriptText>assert messageExchange.timeTaken &lt; 3000
+//get json response
+import groovy.json.JsonSlurper
+def responseMessage = messageExchange.response.responseContent
+def json = new JsonSlurper().parseText(responseMessage)
+
+//assert node values
+log.info json.success
+assert json.success.toString() != null
+assert json.message.toString() == "User registered successfully"</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer2" id="d7bf0890-6cc5-4d31-8710-f4162cdf4733"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>Data</con:name><con:sourceType>Request</con:sourceType><con:sourceStep>Signup</con:sourceStep><con:targetType>Request</con:targetType><con:targetStep>signin</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="restrequest" name="signin" id="3baf2e7c-2fd4-4306-b29e-915ced24fd86"><con:settings/><con:config service="http://localhost:8081" resourcePath="/api/auth/signin" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="signin" id="4aa1d147-794c-4899-b270-e44dce149e3f" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8081</con:endpoint><con:request>
+{
+  "firstName": "nnCcDB",
+  "lastName": "zKwXjI",
+  "username": "nnccdb",
+  "password": "8Rp8lXo6",
+  "email": "nnCcDB.zKwXjI@gmail.com",
+  "usernameOrEmail": "nnccdb"
+}
+</con:request><con:originalUri>http://localhost/api/auth/signin</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:loadTest id="ae85a0af-38cf-43bb-b930-b02092bc5392" name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>40</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

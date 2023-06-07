@@ -1,0 +1,16 @@
+{
+    "firstName": "Leanne",
+    "lastName": "Graham",
+    "username": "leanne",
+    "password": "password",
+    "email": "leanne.graham@gmail.com"
+}
+{
+    "username": "leanne",
+    "password": "password"
+}
+
+{
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg2MDk1MTkxLCJleHAiOjE2ODYwOTg3OTF9.Z6w8Yn07ZTmpe_wY_lssZU2zadLK66VAo32rVVAaDXBya_zZR-dPV_97wCU1qKuNkUj-KJTp0pvEbdlp3MRnbw",
+    "tokenType": "Bearer"
+ }
